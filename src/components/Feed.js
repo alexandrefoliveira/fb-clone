@@ -1,29 +1,38 @@
 import { Divider } from "@material-ui/core";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Feed.css";
 import StoryReel from "./StoryReel";
 import MessageSender from "./MessageSender";
 import Post from "./Post";
+import db from "./firebase";
 
 function Feed() {
+  //START - Integrating FIRESTORE WITH MY WEBAPPLICATION
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })))
+      );
+  }, []);
+  // END ***
+
   return (
     <div className="feed">
       <StoryReel />
       <MessageSender />
-      <Post
-        profilePic="https://avatars1.githubusercontent.com/u/35555946?s=460&u=17ec0285836ef1503b26a3f3bb6ca01800324ff1&v=4"
-        image="https://www.topgear.com/sites/default/files/styles/large/public/cars-car/carousel/2018/11/a1813694_large.jpg?itok=L-V04Nmn"
-        username="Alexandre Oliveira"
-        timestamp="This is a Timestamp"
-        message="Wooow this works!!!"
-      />
-      <Post
-        profilePic="https://avatars1.githubusercontent.com/u/35555946?s=460&u=17ec0285836ef1503b26a3f3bb6ca01800324ff1&v=4"
-        image="https://www.elegantthemes.com/blog/wp-content/uploads/2020/02/000-Online-Code-Editors.png"
-        username="Alexandre Oliveira"
-        timestamp="This is a Timestamp"
-        message="This is great!!!"
-      />
+
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          profilePic={post.data.profilePic}
+          image={post.data.image}
+          username={post.data.username}
+          timestamp={post.data.timestamp}
+          message={post.data.message}
+        />
+      ))}
     </div>
   );
 }

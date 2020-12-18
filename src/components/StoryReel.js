@@ -19,7 +19,7 @@ function StoryReel() {
 
       <Story
         image="https://api.time.com/wp-content/uploads/2019/06/mcdxmen_fe107.jpg"
-        profileSrc="https://static.wikia.nocookie.net/x-men/images/1/1c/162319_main.jpg/revision/latest/scale-to-width-down/340?cb=20090121001811"
+        profileSrc="https://vignette.wikia.nocookie.net/xmenfirstclass/images/a/a6/Jean_grey_x_men_last_sand.jpg/revision/latest?cb=20130320054945&path-prefix=fr"
         title="Jen"
       />
 

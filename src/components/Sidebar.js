@@ -1,5 +1,3 @@
-import { Divider } from "@material-ui/core";
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import "./Sidebar.css";
 import SidebarRow from "./SidebarRow";
@@ -10,13 +8,17 @@ import ChatIcon from "@material-ui/icons/Chat";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
+import { useStateValue } from "./StateProvider";
 
 function Sidebar() {
+  const [{ user }, dispatch] = useStateValue();
   return (
     <div className="sidebar">
       <SidebarRow
-        src="https://avatars1.githubusercontent.com/u/35555946?s=460&u=17ec0285836ef1503b26a3f3bb6ca01800324ff1&v=4"
-        title="Alexandre Oliveira"
+        src={user.photoURL}
+        title={user.displayName}
+        // src="https://avatars1.githubusercontent.com/u/35555946?s=460&u=17ec0285836ef1503b26a3f3bb6ca01800324ff1&v=4"
+        // title="Alexandre Oliveira"
       />
       <SidebarRow
         Icon={LocalHospitalIcon}
